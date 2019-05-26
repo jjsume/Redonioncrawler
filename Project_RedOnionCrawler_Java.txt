@@ -16,5 +16,10 @@ There¨s four steps stading on the roots:
 4. Finding for the matches equalled to the user¨s search term (keyword).
 5. Outputting the relevant content and metadata for the matches.
 
+Project Blog created 26.5.2019 at
+https://redonioincrawler.home.blog/
+
+Stay Tuned!
+
 
 
