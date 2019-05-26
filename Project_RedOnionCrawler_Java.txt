@@ -1,0 +1,20 @@
+Project plan and simple algorithm for a simple Webcrawler in Java
+
+My name is Jere Sumell and my ambitious goal is to program some kind of Webcrawler in Java for educational purposes.
+
+Project name: Redonioncrawler
+Implementation languege: Java
+
+Source code repository found @ my Github -profile (https://www.github.com/jjsume)
+License: GNU General Public License 3.0
+
+There¨s four steps stading on the roots:
+
+1. Receiving the source document (URL Source code)
+2. Parsing the outcoming links.
+3. Saving the texts written in paragrapghs to the memory.
+4. Finding for the matches equalled to the user¨s search term (keyword).
+5. Outputting the relevant content and metadata for the matches.
+
+
+
