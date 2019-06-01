@@ -14,34 +14,34 @@ import java.util.ArrayList;
 public class SkeletonMiner {
 
 	//Attributes;
-	private StringBuilder sBuildEnd;
-	private StringBuilder sBuildStart;
+	private String sBuildEnd;
+	private String sBuildStart;
 	private StringBuffer reversed;
 	private String cont;
 	
 	//ArrayLists
 	
-	private ArrayList outcomingLinks;
-	private ArrayList para;
+	private ArrayList<String> outcomingLinks;
+	private ArrayList<String> para;
 	//Constructor to init variables (new memory references for objects.)
 	
 	public SkeletonMiner(String cont) {
-		this.sBuildEnd = new StringBuilder();
-		this.sBuildStart = new StringBuilder();
+		this.sBuildEnd = null;
+		this.sBuildStart = null;
 		this.reversed = new StringBuffer("");
 		this.cont = cont;
-		this.outcomingLinks = new ArrayList();
-		this.para = new ArrayList();
+		this.outcomingLinks = new ArrayList<String>();
+		this.para = new ArrayList<String>();
 	}
 	
 	//Setters and Getters
 	
 	
-	public ArrayList getOutcomingLinks() {
+	public ArrayList<String> getOutcomingLinks() {
 		return outcomingLinks;
 	}
 	
-	public ArrayList getParas() {
+	public ArrayList<String> getParas() {
 		return para;
 	}
 	
@@ -59,16 +59,26 @@ public class SkeletonMiner {
 		return sbB.toString();
 		
 	}
+	
+	//Next method build String with StringBuffer.
+	public String appendChars(String y) {
+		StringBuffer temp = new StringBuffer("");
+		for (int x=0;x<y.length();x++) {
+			temp.append(y.charAt(x));
+		}
+		return temp.toString();
+	}
 
 
 	//Next method is used to tokenize String
-	public ArrayList tokenizeString(String orig, String prefix, String whatToLook) {
+	public ArrayList<String> tokenizeString(String orig, String prefix, String whatToLook) {
 		StringTokenizer temp = new StringTokenizer(orig, prefix);
 		String tempString = temp.nextToken();
-		ArrayList tempStringArray = new ArrayList();
+		String whatToLookToo = appendChars(whatToLook);
+		ArrayList<String> tempStringArray = new ArrayList<String>();
 	
 		while (temp.hasMoreElements()) {
-			if (tempString.contains(new StringBuilder(whatToLook))) {
+			if (tempString.contains(whatToLookToo)) {
 				tempStringArray.add(tempString);
 				
 			}
@@ -103,8 +113,8 @@ public class SkeletonMiner {
 	public void parseLinks() {
 		//Clearing the Data Type StringBuffer first
 		clearBuffer();
-		sBuildEnd.append(new StringBuilder("/a>"));
-		sBuildStart.append(new StringBuilder("<a href="));
+		this.sBuildEnd = appendChars("/a>");
+		this.sBuildStart = appendChars("<a href=");
 		int tempLoppu = cont.indexOf(sBuildEnd.toString());
 		String orig="";
 		String backComingString="";
@@ -115,7 +125,7 @@ public class SkeletonMiner {
 		
 			}
 			orig = reverseString(reversed.toString());
-			ArrayList backComingStringArray = tokenizeString(cont, ">","https://");
+			ArrayList<String> backComingStringArray = tokenizeString(cont, ">","https://");
 			String del = null;
 			for (int y = 0;y<backComingStringArray.size();y++) {
 				del = (String) backComingStringArray.get(y);
@@ -131,8 +141,8 @@ public class SkeletonMiner {
 	public void parseRest() {
 		//Clearing the Data Type StringBuffer first
 		clearBuffer();
-		sBuildEnd.append(new StringBuilder(">"));
-		sBuildStart.append(new StringBuilder("<"));
+		this.sBuildEnd = appendChars("/>");
+		this.sBuildStart = appendChars("<");
 		int tempLoppu = cont.indexOf(sBuildEnd.toString());
 		String orig="";
 		String backComingString="";
@@ -143,7 +153,7 @@ public class SkeletonMiner {
 		
 			}
 			orig = reverseString(reversed.toString());
-			ArrayList backComingStringArray = tokenizeString(cont, ">","");
+			ArrayList<String> backComingStringArray = tokenizeString(cont, ">","");
 			String del = null;
 			for (int y = 0;y<backComingStringArray.size();y++) {
 				del = (String) backComingStringArray.get(y);
